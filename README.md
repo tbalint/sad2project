@@ -1,4 +1,4 @@
 sad2project
 ===========
 
-ITU School Project for SAD2
+Project based on Twitter Streaming API to build graph on retweets and compute ranking algorithms on it.
