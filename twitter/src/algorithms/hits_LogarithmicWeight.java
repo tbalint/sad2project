@@ -44,10 +44,10 @@ public class hits_LogarithmicWeight {
 										// pages that link to p
 					Edge e=itr.next();
 					double w =1;
-					if (e.getWeight()>10){
+					if (e.getWeight()>1){
 						w = Math.log10(e.getWeight());
 					} else {
-						w = e.getWeight();
+						w = 0.1;
 					}
 					//System.out.println("vecini::" + to.toString());
 					double auth = (Double) authorityScores.get(graph.get(i));
@@ -89,10 +89,10 @@ public class hits_LogarithmicWeight {
 										// pages that p links to
 					Edge e = itr.next();
 					double w =1;
-					if (e.getWeight()>10){
+					if (e.getWeight()>1){
 						w = Math.log10(e.getWeight());
 					} else {
-						w = e.getWeight();
+						w = 0.1;
 					}
 					double hub = (Double) hubScores.get(graph.get(i));
 					hub += w* authorityScores.get(e.getFrom());
@@ -121,5 +121,12 @@ public class hits_LogarithmicWeight {
 
 		}
 
+	}
+	public Map<Node, Double> getAuth(){
+		return authorityScores;
+	}
+	
+	public Map<Node, Double> getHub(){
+		return hubScores;
 	}
 }

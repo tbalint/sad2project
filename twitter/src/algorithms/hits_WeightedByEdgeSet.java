@@ -118,4 +118,11 @@ public class hits_WeightedByEdgeSet {
 		}
 
 	}
+	public Map<Node, Double> getAuth(){
+		return authorityScores;
+	}
+	
+	public Map<Node, Double> getHub(){
+		return hubScores;
+	}
 }

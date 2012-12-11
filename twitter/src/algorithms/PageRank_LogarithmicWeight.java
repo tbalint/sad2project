@@ -3,16 +3,15 @@ package algorithms;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
-//I'm using the same class Node
-public class PageRank {
 
+public class PageRank_LogarithmicWeight {
 	private ArrayList<Node> graph;
 	private Map<Node, Double> pageRank;
 	private Map<Node, Double> newPageRank;
 	private Double d;
 	private int N;
 
-	public PageRank(ArrayList<Node> graph, int iteration) {
+	public PageRank_LogarithmicWeight(ArrayList<Node> graph, int iteration) {
 		this.graph = graph;
 		this.N = graph.size();
 		this.pageRank = new HashMap<Node, Double>();
@@ -41,8 +40,13 @@ public class PageRank {
 					double npr = newPageRank.get(graph.get(j));
 					Node.Edge e=(Node.Edge) (graph.get(j).getInEdges().toArray()[k]);
 					Node n=e.getFrom();
-					
-					npr += (d * pageRank.get(n))
+					double w =1;
+					if (e.getWeight()>1){
+						w = Math.log10(e.getWeight());
+					} else {
+						w = 0.1;
+					}
+					npr += (d * pageRank.get(n) * w)
 							/ graph.get(graph.indexOf(n)).getOutEdges().size();// get PageRank
 																// from inlinks
 					newPageRank.put(graph.get(j), npr);
@@ -57,5 +61,4 @@ public class PageRank {
 	public Map<Node, Double> getRank(){
 		return pageRank;
 	}
-
 }

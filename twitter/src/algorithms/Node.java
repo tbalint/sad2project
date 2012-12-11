@@ -31,9 +31,10 @@ public class Node {
 		for (Edge edge:this.outEdges){
 			if (node.equals(edge.getTo())){
 				edge.increaseWeight(1);
-				break;
+				return;
 			}
 		}
+		this.addEdge(node);
 	}
 
 	@Override

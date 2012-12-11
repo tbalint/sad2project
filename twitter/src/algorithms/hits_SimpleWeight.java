@@ -112,4 +112,11 @@ public class hits_SimpleWeight {
 
 	}
 
+	public Map<Node, Double> getAuth(){
+		return authorityScores;
+	}
+	
+	public Map<Node, Double> getHub(){
+		return hubScores;
+	}
 }

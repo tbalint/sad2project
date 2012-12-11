@@ -3,8 +3,10 @@ package algorithms;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
-//I'm using the same class Node
-public class PageRank {
+
+import algorithms.Node.Edge;
+
+public class PageRank_WeightedByEdgeSet {
 
 	private ArrayList<Node> graph;
 	private Map<Node, Double> pageRank;
@@ -12,7 +14,7 @@ public class PageRank {
 	private Double d;
 	private int N;
 
-	public PageRank(ArrayList<Node> graph, int iteration) {
+	public PageRank_WeightedByEdgeSet(ArrayList<Node> graph, int iteration) {
 		this.graph = graph;
 		this.N = graph.size();
 		this.pageRank = new HashMap<Node, Double>();
@@ -37,12 +39,16 @@ public class PageRank {
 				}
 			for (int j = 0; j < N; j++) {
 				newPageRank.put(graph.get(j), dp + ((1 - d) / N));
+				int weightSum=0;
+				for (Edge e :graph.get(j).getInEdges()){
+					weightSum+=e.getWeight();
+				}
 				for (int k = 0; k < graph.get(j).getInEdges().size(); k++) {
 					double npr = newPageRank.get(graph.get(j));
 					Node.Edge e=(Node.Edge) (graph.get(j).getInEdges().toArray()[k]);
 					Node n=e.getFrom();
 					
-					npr += (d * pageRank.get(n))
+					npr += (d * pageRank.get(n)* e.getWeight()/weightSum)
 							/ graph.get(graph.indexOf(n)).getOutEdges().size();// get PageRank
 																// from inlinks
 					newPageRank.put(graph.get(j), npr);
@@ -57,5 +63,4 @@ public class PageRank {
 	public Map<Node, Double> getRank(){
 		return pageRank;
 	}
-
 }

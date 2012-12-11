@@ -14,7 +14,7 @@ public class hitsAlgorithm {
 	private Map<Node, Double> hubScores;
 	private Map<Node, Double> authorityScores;
 
-	public hitsAlgorithm(ArrayList<Node> graph) {
+	public hitsAlgorithm(ArrayList<Node> graph, int iteration) {
 		this.graph = graph;
 		this.hubScores = new HashMap<Node, Double>();
 		this.authorityScores = new HashMap<Node, Double>();
@@ -23,7 +23,7 @@ public class hitsAlgorithm {
 			hubScores.put(graph.get(i), (double) 1);
 			authorityScores.put(graph.get(i), (double) 1);
 		}
-		computeHITS(1);
+		computeHITS(iteration);
 	}
 
 	public void computeHITS(int numIterations) {
@@ -152,29 +152,12 @@ public class hitsAlgorithm {
 		return b.toString();
 	}
 
-	public static void main(String[] args) {
-		Node unu = new Node("unu");
-		Node doi = new Node("doi");
-		Node trei = new Node("trei");
-		Node patru = new Node("patru");
-
-		unu.addEdge(doi);
-		unu.addEdge(trei);
-		unu.addEdge(patru);
-		doi.addEdge(trei);
-		doi.addEdge(patru);
-		trei.addEdge(doi);
-		trei.addEdge(patru);
-
-		ArrayList<Node> graph = new ArrayList();
-		graph.add(unu);
-		graph.add(doi);
-		graph.add(trei);
-		graph.add(patru);
-
-		hitsAlgorithm h = new hitsAlgorithm(graph);
-		h.toString();
-
+	public Map<Node, Double> getAuth(){
+		return authorityScores;
+	}
+	
+	public Map<Node, Double> getHub(){
+		return hubScores;
 	}
 
 }
